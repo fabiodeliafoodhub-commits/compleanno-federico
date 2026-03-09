@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -X POST \"https://n8n.srv1036443.hstgr.cloud/webhook/8a4e62e0-491d-4957-ab5c-ed3e6927203e\" -H \"Content-Type: application/x-www-form-urlencoded\" --data-urlencode \"family_name=Famiglia Test\" --data-urlencode \"adults=2\" --data-urlencode \"children=1\" --data-urlencode \"timestamp=2024-01-01T10:00:00.000Z\")",
+      "Bash(curl -s -w \"\\\\nHTTP Status: %{http_code}\" -X POST \"https://n8n.srv1036443.hstgr.cloud/webhook/8a4e62e0-491d-4957-ab5c-ed3e6927203e\" -H \"Content-Type: application/json\" -d '{\"\"family_name\"\":\"\"Famiglia Test\"\",\"\"adults\"\":2,\"\"children\"\":1}')"
+    ]
+  }
+}

@@ -1,0 +1,289 @@
+:root {
+    --bg-color: #FEFAF2;
+    /* Panna super chiaro */
+    --text-color: #4A5D23;
+    /* Verde molto scuro per contrasto */
+    --primary-green: #98C93C;
+    /* Verde brillante del dinosauro */
+    --accent-orange: #b5d726;
+    /* Nuovo Salmone/Arancio chiaro (ex giallo) */
+    --accent-pink: #618200;
+    /* Verde scuro (ex rosa tortina) */
+    --card-bg: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 1.25rem;
+    /* Testo ingrandito */
+    overflow-x: hidden;
+}
+
+#falling-food-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.falling-item {
+    position: absolute;
+    top: -50px;
+    font-size: 2rem;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.hero {
+    text-align: center;
+    padding: 3rem 1rem 1rem 1rem;
+    position: relative;
+    z-index: 20;
+}
+
+h1.curved-text {
+    margin-bottom: -45px;
+    /* Pulls the image closer to the arched text */
+    filter: drop-shadow(2px 2px 0px rgba(139, 172, 62, 0.2));
+}
+
+h1.curved-text svg {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    overflow: visible;
+}
+
+h1.curved-text text {
+    fill: var(--primary-green);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.bounce-in {
+    animation: bounce 1s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.hero-image img {
+    max-width: 600px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--primary-green);
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+main {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+    position: relative;
+    z-index: 20;
+}
+
+.card {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    border: 4px solid var(--text-color);
+    box-shadow: 8px 8px 0px var(--accent-orange);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0px var(--accent-orange);
+}
+
+h2 {
+    color: var(--accent-pink);
+    /* Usa il verde scuro #618200 */
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0px rgba(97, 130, 0, 0.2);
+}
+
+.event-details p {
+    margin-bottom: 0.5rem;
+}
+
+.event-details .date {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-green);
+}
+
+.gift-section .note {
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: #888;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1.2rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 3px solid var(--text-color);
+    width: 100%;
+    margin-top: 1rem;
+    box-shadow: 4px 4px 0px var(--text-color);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--text-color);
+}
+
+.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-color);
+}
+
+.btn-amazon {
+    background-color: var(--accent-pink);
+    color: white;
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+form {
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-green);
+}
+
+input {
+    width: 100%;
+    padding: 1rem;
+    border: 3px solid #e0e0e0;
+    border-radius: 14px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    color: var(--text-color);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 4px rgba(152, 201, 60, 0.2);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
+
+#success-message {
+    padding: 2rem 0;
+    color: var(--primary-green);
+}
+
+#success-message h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+#error-message {
+    padding: 1rem 0;
+    color: #e74c3c;
+}

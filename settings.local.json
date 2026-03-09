@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:openrouter.ai)",
+      "Bash(npx n8n-mcp:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.anthropic.com)",
+      "Bash(cmd:*)",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-update-data-source",
+      "Bash(python:*)",
+      "Bash(\"/c/Users/fabio/Desktop/tally-zoom-webinar.json\":*)"
+    ]
+  }
+}

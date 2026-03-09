@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federico Turns One!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="falling-food-container"></div>
+
+    <header class="hero">
+        <h1 class="bounce-in curved-text" aria-label="FEDERICO TURNS ONE!">
+            <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+                <!-- A soft quadratic bezier curve for the arch -->
+                <path id="archCurve" d="M 20 130 Q 250 -10 480 130" fill="transparent" />
+                <text>
+                    <textPath href="#archCurve" startOffset="50%" text-anchor="middle">
+                        FEDERICO TURNS ONE!
+                    </textPath>
+                </text>
+            </svg>
+        </h1>
+        <div class="hero-image">
+            <img src="assets/dino.png" alt="Pastel Dinosaur">
+        </div>
+        <p class="subtitle">Ti aspettiamo per festeggiare insieme il primo compleanno di Federico!</p>
+    </header>
+
+    <main>
+        <section class="event-details">
+            <div class="card">
+                <h2>Quando & Dove</h2>
+                <p class="date">Sabato 18 aprile</p>
+                <p class="time">dalle 10 in poi</p>
+                <p class="location">al centro ricreativo</p>
+                <p class="venue-name"><strong>Labadabadu</strong></p>
+                <p class="address">(Via Cella 255, San Bartolo)</p>
+            </div>
+        </section>
+
+        <section class="rsvp-section">
+            <div class="card" id="rsvp-card">
+                <h2>Ci Sarete?</h2>
+                <p>Fateci sapere se ci sarete entro il 10 aprile, indicandoci il numero di adulti e bambini. Non
+                    vediamo l'ora di festeggiare insieme a voi! 🥰</p>
+
+                <form id="rsvp-form">
+                    <div class="form-group">
+                        <label for="family_name">Nome Famiglia</label>
+                        <input type="text" id="family_name" name="family_name" required
+                            placeholder="Es. Famiglia Rossi">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="adults">Adulti</label>
+                            <input type="number" id="adults" name="adults" min="1" value="2" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="children">Bambini</label>
+                            <input type="number" id="children" name="children" min="0" value="1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submit-btn" disabled>Conferma Presenza</button>
+                    <!-- Button is temporarely disabled while I test it -->
+                </form>
+
+                <div id="success-message" class="hidden">
+                    <h3>Grazie! 🎉</h3>
+                    <p>Abbiamo ricevuto la tua conferma.</p>
+                </div>
+                <div id="error-message" class="hidden">
+                    <p>Si è verificato un errore, riprova più tardi.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="gift-section">
+            <div class="card">
+                <h2>Se volete...</h2>
+                <p>Visto che in molti ci hanno chiesto un’idea regalo, abbiamo chiesto a cicciuzzo cosa volesse: lui ha
+                    risposto “pappa” 😅🤦🏻‍♀️ ma noi abbiamo preferito suggerirvi qualche giochino e altre cose utili
+                    che trovate qui:</p>
+                <a href="https://www.amazon.it/registries/gl/guest-view/ISSZBLAW68JE?ref_=cm_sw_r_apin_ggr-subnav-share_N60M3V8PD9FMR004RX41&language=en-US"
+                    target="_blank" class="btn btn-primary">Vai alla Lista Amazon</a>
+                <p class="note">Usatela pure se siete a corto di idee, ma sappiate che la vostra presenza è già il
+                    regalo più grande! ❤️</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
