@@ -12,27 +12,64 @@
 </head>
 
 <body>
+    <!-- SVG Filters for Watercolor Effects -->
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <defs>
+            <!-- Soft watercolor bleed for text and shapes -->
+            <filter id="watercolor" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"
+                    result="displaced" />
+                <feGaussianBlur in="displaced" stdDeviation="0.5" result="blurred" />
+                <feMerge>
+                    <feMergeNode in="blurred" />
+                </feMerge>
+            </filter>
+            <!-- Stronger blob effect for buttons -->
+            <filter id="watercolor-blob" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"
+                    result="displaced" />
+                <feGaussianBlur in="displaced" stdDeviation="1" result="blurred" />
+                <feComponentTransfer in="blurred" result="glow">
+                    <feFuncA type="linear" slope="1.5" />
+                </feComponentTransfer>
+                <feMerge>
+                    <feMergeNode in="glow" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+    </svg>
+
     <div id="falling-food-container"></div>
 
-    <header class="hero">
-        <h1 class="bounce-in curved-text" aria-label="FEDERICO TURNS ONE!">
-            <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
-                <!-- A soft quadratic bezier curve for the arch -->
-                <path id="archCurve" d="M 20 130 Q 250 -10 480 130" fill="transparent" />
-                <text>
-                    <textPath href="#archCurve" startOffset="50%" text-anchor="middle">
-                        FEDERICO TURNS ONE!
-                    </textPath>
-                </text>
-            </svg>
-        </h1>
-        <div class="hero-image">
-            <img src="assets/dino.png" alt="Pastel Dinosaur">
-        </div>
-        <p class="subtitle">Ti aspettiamo per festeggiare insieme il primo compleanno di Federico!</p>
-    </header>
-
     <main>
+        <!-- Floating watercolor icons -->
+        <div class="floating-icons">
+            <img src="assets/cookie.svg" class="icon icon-cookie" alt=""
+                onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'%23b5d726\' opacity=\'0.6\' filter=\'url(%23watercolor)\'/><circle cx=\'35\' cy=\'40\' r=\'5\' fill=\'%234A5D23\' opacity=\'0.5\'/><circle cx=\'60\' cy=\'35\' r=\'6\' fill=\'%234A5D23\' opacity=\'0.5\'/><circle cx=\'50\' cy=\'65\' r=\'7\' fill=\'%234A5D23\' opacity=\'0.5\'/><circle cx=\'70\' cy=\'60\' r=\'4\' fill=\'%234A5D23\' opacity=\'0.5\'/><circle cx=\'30\' cy=\'60\' r=\'6\' fill=\'%234A5D23\' opacity=\'0.5\'/></svg>'">
+            <img src="assets/hamburger.svg" class="icon icon-hamburger" alt=""
+                onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path d=\'M20 50 Q50 20 80 50 Z\' fill=\'%23b5d726\' opacity=\'0.6\' filter=\'url(%23watercolor)\'/><rect x=\'20\' y=\'52\' width=\'60\' height=\'10\' rx=\'5\' fill=\'%234A5D23\' opacity=\'0.4\'/><path d=\'M20 65 Q50 80 80 65 Z\' fill=\'%23b5d726\' opacity=\'0.6\' filter=\'url(%23watercolor)\'/></svg>'">
+        </div>
+
+        <header class="hero">
+            <h1 class="bounce-in curved-text" aria-label="FEDERICO TURNS ONE!">
+                <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+                    <path id="archCurve" d="M 20 130 Q 250 -10 480 130" fill="transparent" />
+                    <text>
+                        <textPath href="#archCurve" startOffset="50%" text-anchor="middle">
+                            FEDERICO TURNS ONE!
+                        </textPath>
+                    </text>
+                </svg>
+            </h1>
+            <div class="hero-image">
+                <img src="assets/dino.png" alt="Pastel Dinosaur">
+            </div>
+            <p class="subtitle">Ti aspettiamo per festeggiare insieme il primo compleanno di Federico!</p>
+        </header>
+
         <section class="event-details">
             <div class="card">
                 <h2>Quando & Dove</h2>
@@ -67,7 +104,6 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" id="submit-btn" disabled>Conferma Presenza</button>
-                    <!-- Button is temporarely disabled while I test it -->
                 </form>
 
                 <div id="success-message" class="hidden">
@@ -82,12 +118,11 @@
 
         <section class="gift-section">
             <div class="card">
-                <h2>Se volete...</h2>
                 <p>Visto che in molti ci hanno chiesto un’idea regalo, abbiamo chiesto a cicciuzzo cosa volesse: lui ha
                     risposto “pappa” 😅🤦🏻‍♀️ ma noi abbiamo preferito suggerirvi qualche giochino e altre cose utili
                     che trovate qui:</p>
                 <a href="https://www.amazon.it/registries/gl/guest-view/ISSZBLAW68JE?ref_=cm_sw_r_apin_ggr-subnav-share_N60M3V8PD9FMR004RX41&language=en-US"
-                    target="_blank" class="btn btn-primary">Vai alla Lista Amazon</a>
+                    target="_blank" class="btn btn-primary btn-amazon">Vai alla Lista Amazon</a>
                 <p class="note">Usatela pure se siete a corto di idee, ma sappiate che la vostra presenza è già il
                     regalo più grande! ❤️</p>
             </div>

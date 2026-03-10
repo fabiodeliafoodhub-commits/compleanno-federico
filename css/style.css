@@ -1,6 +1,6 @@
 :root {
     --bg-color: #FEFAF2;
-    /* Panna super chiaro */
+    /* Panna super chiaro, warm cream-beige */
     --text-color: #4A5D23;
     /* Verde molto scuro per contrasto */
     --primary-green: #98C93C;
@@ -9,7 +9,8 @@
     /* Nuovo Salmone/Arancio chiaro (ex giallo) */
     --accent-pink: #618200;
     /* Verde scuro (ex rosa tortina) */
-    --card-bg: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    /* Translucent cards */
 }
 
 * {
@@ -24,8 +25,86 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     font-size: 1.25rem;
-    /* Testo ingrandito */
     overflow-x: hidden;
+    position: relative;
+    /* Soft, diffused lighting */
+}
+
+/* Watercolor speckles and soft-focus texture overlay */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    z-index: 9999;
+}
+
+/* Mobile Browser Frame */
+.mobile-browser-bar {
+    width: 100%;
+    height: 44px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    z-index: 100;
+    font-size: 0.85rem;
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.browser-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.browser-actions span {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.browser-actions span:nth-child(1) {
+    background-color: #ff5f56;
+}
+
+.browser-actions span:nth-child(2) {
+    background-color: #ffbd2e;
+}
+
+.browser-actions span:nth-child(3) {
+    background-color: #27c93f;
+}
+
+.address-bar {
+    background: #fff;
+    border-radius: 12px;
+    padding: 4px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    max-width: 250px;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.address-bar svg {
+    fill: #666;
+}
+
+.browser-menu svg {
+    fill: #333;
+    opacity: 0.7;
 }
 
 #falling-food-container {
@@ -36,6 +115,9 @@ body {
     height: 100vh;
     pointer-events: none;
     z-index: 10;
+    filter: url(#watercolor);
+    /* Give falling food a watercolor blur */
+    opacity: 0.8;
 }
 
 .falling-item {
@@ -74,8 +156,8 @@ body {
 
 h1.curved-text {
     margin-bottom: -45px;
-    /* Pulls the image closer to the arched text */
-    filter: drop-shadow(2px 2px 0px rgba(139, 172, 62, 0.2));
+    /* Soft watercolor shadow for text */
+    filter: drop-shadow(0px 4px 6px rgba(152, 201, 60, 0.3)) url(#watercolor);
 }
 
 h1.curved-text svg {
@@ -117,11 +199,19 @@ h1.curved-text text {
     }
 }
 
+.hero-image {
+    position: relative;
+}
+
 .hero-image img {
     max-width: 600px;
     height: auto;
     margin: 0 auto;
     display: block;
+    /* Add watercolor effect directly to image if possible */
+    filter: drop-shadow(0px 10px 15px rgba(152, 201, 60, 0.2)) url(#watercolor);
+    opacity: 0.95;
+    mix-blend-mode: multiply;
 }
 
 .subtitle {
@@ -129,6 +219,7 @@ h1.curved-text text {
     color: var(--primary-green);
     margin-top: 1rem;
     font-weight: 600;
+    filter: url(#watercolor);
 }
 
 main {
@@ -139,31 +230,105 @@ main {
     z-index: 20;
 }
 
+/* Floating watercolor icons */
+.floating-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.icon {
+    position: absolute;
+    opacity: 0.7;
+    filter: drop-shadow(2px 2px 4px rgba(152, 201, 60, 0.2));
+}
+
+.icon-cookie {
+    top: 10%;
+    left: -5%;
+    width: 60px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.icon-hamburger {
+    top: 40%;
+    right: -5%;
+    width: 70px;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(10deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+/* Watercolor Boxes */
 .card {
     position: relative;
     background: var(--card-bg);
-    border-radius: 24px;
     padding: 2.5rem 2rem;
     margin-bottom: 2.5rem;
     text-align: center;
-    border: 4px solid var(--text-color);
-    box-shadow: 8px 8px 0px var(--accent-orange);
-    transition: transform 0.2s, box-shadow 0.2s;
+    /* Clean transparent shape for watercolor filter */
+    border: none;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.card::before {
+    /* Irregular watercolor bleed effect instead of neon glow */
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 5px solid var(--primary-green);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    pointer-events: none;
+    opacity: 0.25;
+    filter: url(#watercolor);
+    mix-blend-mode: multiply;
+    transition: all 0.4s ease;
 }
 
 .card:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 10px 10px 0px var(--accent-orange);
+    transform: translateY(-2px);
+}
+
+.card:hover::before {
+    border-radius: 15px 255px 15px 225px/225px 15px 255px 15px;
+    opacity: 0.35;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
 }
 
 h2 {
     color: var(--accent-pink);
-    /* Usa il verde scuro #618200 */
     font-size: 2rem;
     margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 2px 2px 0px rgba(97, 130, 0, 0.2);
+    text-shadow: 0px 3px 6px rgba(97, 130, 0, 0.15);
+    filter: url(#watercolor);
+    /* soft painted text */
 }
 
 .event-details p {
@@ -180,37 +345,49 @@ h2 {
     font-size: 0.9rem;
     margin-top: 1.5rem;
     font-style: italic;
-    color: #888;
+    color: rgba(74, 93, 35, 0.7);
 }
 
+/* Watercolor Rectangular Buttons */
 .btn {
     display: inline-block;
     padding: 1.2rem 2.5rem;
-    border-radius: 50px;
+    /* Irregular rectangular shape for a painted look */
+    border-radius: 8px 15px 10px 6px / 12px 6px 15px 10px;
     font-family: 'Fredoka', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;
-    border: 3px solid var(--text-color);
+    border: none;
     width: 100%;
     margin-top: 1rem;
-    box-shadow: 4px 4px 0px var(--text-color);
-    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow:
+        4px 4px 12px rgba(152, 201, 60, 0.3),
+        -2px -2px 8px rgba(152, 201, 60, 0.1),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+    filter: url(#watercolor);
 }
 
 .btn:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px var(--text-color);
+    transform: scale(1.02) translateY(-2px);
+    border-radius: 12px 8px 15px 10px / 6px 15px 8px 12px;
+    box-shadow:
+        6px 6px 15px rgba(152, 201, 60, 0.4),
+        -3px -3px 10px rgba(152, 201, 60, 0.2),
+        inset 2px 2px 8px rgba(255, 255, 255, 0.4);
 }
 
 .btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px var(--text-color);
+    transform: scale(0.98) translateY(2px);
+    box-shadow:
+        2px 2px 8px rgba(152, 201, 60, 0.3),
+        inset 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .btn-amazon {
-    background-color: var(--accent-pink);
+    background-color: var(--primary-green);
     color: white;
 }
 
@@ -242,24 +419,28 @@ label {
     margin-bottom: 0.5rem;
     font-weight: 600;
     color: var(--primary-green);
+    filter: url(#watercolor);
 }
 
 input {
     width: 100%;
     padding: 1rem;
-    border: 3px solid #e0e0e0;
-    border-radius: 14px;
+    /* Soft watercolor inputs */
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: 2px solid rgba(152, 201, 60, 0.3);
     font-family: 'Fredoka', sans-serif;
     font-size: 1.1rem;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
     color: var(--text-color);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 1px 2px 5px rgba(152, 201, 60, 0.1);
 }
 
 input:focus {
-    border-color: var(--primary-green);
-    box-shadow: 0 0 0 4px rgba(152, 201, 60, 0.2);
+    border-color: rgba(152, 201, 60, 0.6);
+    box-shadow: inset 2px 3px 8px rgba(152, 201, 60, 0.2), 0 0 10px rgba(152, 201, 60, 0.15);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 footer {
@@ -267,6 +448,7 @@ footer {
     padding: 2rem;
     color: var(--primary-green);
     font-weight: 600;
+    filter: url(#watercolor);
 }
 
 .hidden {
@@ -281,9 +463,11 @@ footer {
 #success-message h3 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    filter: url(#watercolor);
 }
 
 #error-message {
     padding: 1rem 0;
     color: #e74c3c;
+    filter: url(#watercolor);
 }
